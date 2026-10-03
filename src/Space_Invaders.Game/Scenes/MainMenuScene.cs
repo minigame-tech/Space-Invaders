@@ -30,6 +30,13 @@ public sealed class MainMenuScene : IScene
 
     public void Draw()
     {
+        // 1. Richiama il metodo statico passandogli la texture dello sfondo
+        // Sostituisci '_app.Sfondo' con la proprietà corretta di GameApp in cui hai caricato la Texture2D dello sfondo
+        SfondoRenderer.Disegna(_app.Sfondo);
+
+        // Se desideri cambiare il livello di oscuramento (di default è 110), puoi passare un secondo valore (0-255):
+        // SfondoRenderer.Disegna(_app.Sfondo, 150);
+
         Testo.Centrato("SPACE INVADERS", 50, Theme.FontTitolo, Theme.Evidenziato);
         DisegnaTabellaPunti();
         MenuRenderer.Disegna(_menu, 400);

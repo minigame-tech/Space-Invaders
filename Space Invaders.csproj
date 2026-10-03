@@ -9,7 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Raylib-cs" Version="8.1.0" />
+        <PackageReference Include="Raylib-cs" Version="8.1.0" />
+    </ItemGroup>
+
+    <!-- Copia automaticamente tutta la cartella assets nella directory di output -->
+    <ItemGroup>
+        <Content Include="assets\**\*.*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>
