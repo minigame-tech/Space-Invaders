@@ -68,18 +68,19 @@ public sealed class PartitaRenderer
 
     private void DisegnaProiettili(Partita partita)
     {
-        if (partita.ProiettileGiocatore is { } colpo)
+        if (partita.ProiettileGiocatore is { } colpoGiocatore)
         {
             // Il laser dello sprite è alto 28 px, il proiettile 20: lo comprimo leggermente.
-            var destinazione = new Rectangle(colpo.X, colpo.Y, Proiettile.Larghezza, Proiettile.Altezza);
+            var destinazione = new Rectangle(colpoGiocatore.X, colpoGiocatore.Y,
+                Proiettile.Larghezza, Proiettile.Altezza);
             Raylib.DrawTexturePro(_sprite, SpriteAtlas.Laser, destinazione,
-                                  System.Numerics.Vector2.Zero, 0f, new Color(255, 255, 255, 255));
+                System.Numerics.Vector2.Zero, 0f, new Color(255, 255, 255, 255));
         }
 
-        foreach (var colpo in partita.ProiettiliInvasori)
-            Raylib.DrawRectangle((int)colpo.X, (int)colpo.Y,
-                                 (int)Proiettile.Larghezza, (int)Proiettile.Altezza,
-                                 Theme.ColoreProiettileInvasori);
+        foreach (var colpoInvasore in partita.ProiettiliInvasori)
+            Raylib.DrawRectangle((int)colpoInvasore.X, (int)colpoInvasore.Y,
+                (int)Proiettile.Larghezza, (int)Proiettile.Altezza,
+                Theme.ColoreProiettileInvasori);
     }
 
     private void DisegnaHud(Partita partita, int record)
