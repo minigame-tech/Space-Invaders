@@ -1,5 +1,12 @@
 # Changelog - Space Invaders
 
+## [v1.0.0] - 2026-10-04
+### Added
+- **Official Release**: The game is now feature-complete and fully polished!
+- **UI Animations**: Added pulsing neon effects to titles in the Main Menu and Game Over screens.
+- **Consistent Visuals**: Integrated the Parallax Starfield background across all menu screens for seamless transitions.
+- **Version Badges**: Displayed v1.0.0 watermark in UI screens.
+
 ## [v0.9.0-beta] - 2026-10-04
 ### Added
 - **Audio System**: Implemented sound effects for shooting (`laserShoot.wav`), explosions (`explosion.wav`), and player damage (`hitHurt.wav`).

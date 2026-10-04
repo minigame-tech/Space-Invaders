@@ -7,6 +7,7 @@ namespace Space_Invaders.Game.Scenes;
 public sealed class MainMenuScene : IScene
 {
     private readonly GameApp _app;
+    private readonly VisualEffects _vfx = new();
     private readonly Menu _menu = new(new[]
     {
         new MenuItem("GIOCA", MenuAzione.Gioca),
@@ -17,6 +18,7 @@ public sealed class MainMenuScene : IScene
 
     public IScene? Update(float dt)
     {
+        _vfx.Update(dt);
         switch (MenuInput.Leggi(_menu))
         {
             case MenuAzione.Gioca:
@@ -30,20 +32,23 @@ public sealed class MainMenuScene : IScene
 
     public void Draw()
     {
-        // 1. Richiama il metodo statico passandogli la texture dello sfondo
-        // Sostituisci '_app.Sfondo' con la proprietà corretta di GameApp in cui hai caricato la Texture2D dello sfondo
-        SfondoRenderer.Disegna(_app.Sfondo);
+        _vfx.DrawBackground();
+        SfondoRenderer.Disegna(_app.Sfondo, 150);
 
-        // Se desideri cambiare il livello di oscuramento (di default è 110), puoi passare un secondo valore (0-255):
-        // SfondoRenderer.Disegna(_app.Sfondo, 150);
-
-        Testo.Centrato("SPACE INVADERS", 50, Theme.FontTitolo, Theme.Evidenziato);
+        // Effetto pulsante per il titolo
+        Color coloreTitolo = Theme.Evidenziato;
+        coloreTitolo.A = (byte)(200 + 55 * MathF.Sin((float)Raylib.GetTime() * 3f));
+        Testo.Centrato("SPACE INVADERS", 50, Theme.FontTitolo, coloreTitolo);
+        
         DisegnaTabellaPunti();
         MenuRenderer.Disegna(_menu, 400);
 
         Testo.Centrato($"RECORD {_app.Record.Valore:D5}", 505, Theme.FontHud, Theme.Primario);
         Testo.Centrato("FRECCE / A D: MUOVI    SPAZIO: SPARA    P: PAUSA    ESC: MENU",
                        560, Theme.FontPiccolo, Theme.Secondario);
+                       
+        // Versione
+        Raylib.DrawText("v1.0.0", Campo.Larghezza - 65, Campo.Altezza - 25, Theme.FontPiccolo, Theme.Secondario);
     }
 
     // La classica tabella dei punti: UFO e un invasore per ogni tipo.
