@@ -19,6 +19,11 @@ public class Partita
     private readonly List<Proiettile> _proiettiliInvasori = new();
     private readonly List<Scudo> _scudi = new();
 
+    public Action? OnGiocatoreSpara { get; set; }
+    public Action<float, float>? OnInvasoreDistrutto { get; set; }
+    public Action<float, float>? OnUfoDistrutto { get; set; }
+    public Action? OnGiocatoreColpito { get; set; }
+
     public Partita(Random? random = null)
     {
         _random = random ?? new Random();
@@ -49,7 +54,10 @@ public class Partita
 
         // Come nell'arcade: un solo colpo del giocatore alla volta.
         if (spara && ProiettileGiocatore is null)
+        {
             ProiettileGiocatore = Giocatore.Spara();
+            OnGiocatoreSpara?.Invoke();
+        }
 
         ProiettileGiocatore?.Aggiorna(dt);
         foreach (var proiettile in _proiettiliInvasori)
@@ -88,11 +96,13 @@ public class Partita
             bersaglio.Uccidi();
             Punteggio += bersaglio.Punti;
             colpo.Distruggi();
+            OnInvasoreDistrutto?.Invoke(bersaglio.CentroX, bersaglio.Y + Invasore.Altezza / 2f);
         }
         else if (Ufo.Attivo && Ufo.Rettangolo.Interseca(area))
         {
             Punteggio += Ufo.Colpisci();
             colpo.Distruggi();
+            OnUfoDistrutto?.Invoke(Ufo.X + Ufo.Larghezza / 2f, Ufo.Y + Ufo.Altezza / 2f);
         }
         else if (ColpisceScudo(colpo))
         {
@@ -124,6 +134,7 @@ public class Partita
             return;
 
         Giocatore.Colpito();
+        OnGiocatoreColpito?.Invoke();
         foreach (var colpo in _proiettiliInvasori)
             colpo.Distruggi();
 

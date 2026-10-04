@@ -68,9 +68,15 @@ public sealed class PartitaRenderer
 
     private void DisegnaProiettili(Partita partita)
     {
+        Raylib.BeginBlendMode(BlendMode.Additive);
+
         if (partita.ProiettileGiocatore is { } colpoGiocatore)
         {
-            // Il laser dello sprite è alto 28 px, il proiettile 20: lo comprimo leggermente.
+            // Glow effect
+            Raylib.DrawRectangle((int)colpoGiocatore.X - 4, (int)colpoGiocatore.Y - 4,
+                (int)Proiettile.Larghezza + 8, (int)Proiettile.Altezza + 8,
+                new Color(0, 255, 255, 100)); // Cyan glow
+
             var destinazione = new Rectangle(colpoGiocatore.X, colpoGiocatore.Y,
                 Proiettile.Larghezza, Proiettile.Altezza);
             Raylib.DrawTexturePro(_sprite, SpriteAtlas.Laser, destinazione,
@@ -78,9 +84,18 @@ public sealed class PartitaRenderer
         }
 
         foreach (var colpoInvasore in partita.ProiettiliInvasori)
+        {
+            // Glow effect
+            Raylib.DrawRectangle((int)colpoInvasore.X - 4, (int)colpoInvasore.Y - 4,
+                (int)Proiettile.Larghezza + 8, (int)Proiettile.Altezza + 8,
+                new Color((int)Theme.ColoreProiettileInvasori.R, (int)Theme.ColoreProiettileInvasori.G, (int)Theme.ColoreProiettileInvasori.B, 100));
+
             Raylib.DrawRectangle((int)colpoInvasore.X, (int)colpoInvasore.Y,
                 (int)Proiettile.Larghezza, (int)Proiettile.Altezza,
                 Theme.ColoreProiettileInvasori);
+        }
+        
+        Raylib.EndBlendMode();
     }
 
     private void DisegnaHud(Partita partita, int record)

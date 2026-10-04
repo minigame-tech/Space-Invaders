@@ -21,6 +21,8 @@ public sealed class GameApp
         Raylib.SetTargetFPS(60);
         Raylib.SetExitKey(KeyboardKey.Null);  // ESC non chiude più la finestra: serve per pausa/menu
 
+        AudioSystem.Init(); // <--- Inizializza audio
+
         Sprite = Raylib.LoadTexture(SpriteAtlas.Percorso);
         if (Sprite.Id == 0)
             Console.WriteLine($"ATTENZIONE: sprite non trovato ({SpriteAtlas.Percorso}). " +
@@ -55,6 +57,7 @@ public sealed class GameApp
 
         Raylib.UnloadTexture(Sprite);
         Raylib.UnloadTexture(Sfondo); // <--- Scarico dalla memoria la texture dello sfondo prima di chiudere
+        AudioSystem.Close(); // <--- Chiude audio
         Raylib.CloseWindow();
     }
 
