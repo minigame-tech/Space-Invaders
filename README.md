@@ -9,8 +9,6 @@
 A remake of the classic arcade game **Space Invaders**, developed entirely in **C#** on **.NET**.
 The project uses **Raylib-cs**, the C# binding for [raylib](https://www.raylib.com/), to handle rendering, input and audio, with a clean separation between game logic and presentation.
 
-> 🚧 **Work in progress**: the player ship is already playable (movement and shooting). Invaders, shields and scoring are on the way. See the [Roadmap](#-roadmap).
-
 <!--
 TIPS: Add a gameplay screenshot or GIF here!
 ![Gameplay Screenshot](docs/gameplay-preview.png)
@@ -95,16 +93,16 @@ We welcome contributions of all kinds, whether it's reporting bugs, suggesting n
 
 ### 👾 Core Gameplay
 - [x] **Player ship:** horizontal movement, shooting with cooldown, lives.
-- [ ] **Invader grid:** formation that moves sideways and descends, with two animation frames.
-- [ ] **Collisions:** bullets vs. invaders, invader bombs vs. the player.
-- [ ] **Shields:** destructible bunkers.
-- [ ] **Mystery UFO:** bonus ship crossing the top of the screen.
-- [ ] **Score & levels:** score counter, high score and increasing difficulty.
+- [x] **Invader grid:** formation that moves sideways and descends, with two animation frames.
+- [x] **Collisions:** bullets vs. invaders, invader bombs vs. the player.
+- [x] **Shields:** destructible bunkers.
+- [x] **Mystery UFO:** bonus ship crossing the top of the screen.
+- [x] **Score & levels:** score counter, high score and increasing difficulty.
 
 ### 🎨 Polish
-- [ ] **Sound effects & music:** shooting, explosions and the classic marching beat.
-- [ ] **Main menu & Game Over screen.**
-- [ ] **Animations:** explosions and smooth screen transitions.
+- [x] **Sound effects & music:** shooting and explosions.
+- [x] **Main menu & Game Over screen.**
+- [x] **Animations:** explosions and smooth screen transitions.
 
 ## 🖼️ Assets & Disclaimer
 
